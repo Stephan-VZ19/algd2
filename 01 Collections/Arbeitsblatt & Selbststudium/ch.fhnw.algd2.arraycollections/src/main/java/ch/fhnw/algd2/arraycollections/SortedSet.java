@@ -90,8 +90,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 			for (int j=0; j<i; j++) {
 				dataTemp[j] = data[j];
 			}
-			for (int k=i+1; k<size; k++) {
-				dataTemp[k] = data[k];
+			for (int k=i; k+1<size; k++) {
+				dataTemp[k] = data[k+1];
 			}
 			data = dataTemp;
 			size--;
@@ -134,6 +134,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		bag.add(2);
 		bag.add(2);
 		bag.add(1);
+		bag.add(3);
+		bag.remove(2);
 		System.out.println(Arrays.toString(bag.toArray()));
 	}
 }
