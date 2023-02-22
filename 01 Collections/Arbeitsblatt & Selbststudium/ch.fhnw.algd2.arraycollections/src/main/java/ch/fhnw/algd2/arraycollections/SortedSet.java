@@ -29,6 +29,10 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		if (contains(e)) {
 			return false;
 		}
+
+		if (size == data.length) {
+			throw new UnsupportedOperationException();
+		}
 		// Index i, where the element should be added, sorted
 		int i = 0;
 		while (i < size && e.compareTo(data[i]) > 0) i++;
