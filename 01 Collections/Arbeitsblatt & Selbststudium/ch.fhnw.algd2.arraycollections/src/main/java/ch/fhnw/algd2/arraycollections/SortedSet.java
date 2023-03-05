@@ -25,7 +25,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		if (e == null) {
 			throw new NullPointerException();
 		}
-
 		if (contains(e)) {
 			return false;
 		}
@@ -43,7 +42,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 			}
 			throw new UnsupportedOperationException();
 		} else if (i < size) {
-
 			E[] dataTemp = (E[])new Comparable[data.length];
 			// everything before index i
 			for (int j=0; j<i; j++) {
@@ -57,7 +55,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 			data = dataTemp;
 			size++;
 			return true;
-
 		}
 
 		return false;
@@ -73,11 +70,9 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		if (o == null) {
 			throw new NullPointerException();
 		}
-
 		if (!(contains(o))) {
 			return false;
 		}
-
 		int i = 0;
 		while (i < size && ((E)o).compareTo(data[i]) > 0 ) i++;
 
@@ -134,6 +129,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		bag.add(2);
 		bag.add(2);
 		bag.add(1);
+		bag.add(3);
+		bag.remove(2);
 		System.out.println(Arrays.toString(bag.toArray()));
 	}
 }
