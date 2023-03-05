@@ -28,6 +28,10 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		if (contains(e)) {
 			return false;
 		}
+
+		if (size == data.length) {
+			throw new UnsupportedOperationException();
+		}
 		// Index i, where the element should be added, sorted
 		int i = 0;
 		while (i < size && e.compareTo(data[i]) > 0) i++;
@@ -85,8 +89,8 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 			for (int j=0; j<i; j++) {
 				dataTemp[j] = data[j];
 			}
-			for (int k=i+1; k<size; k++) {
-				dataTemp[k] = data[k];
+			for (int k=i; k+1<size; k++) {
+				dataTemp[k] = data[k+1];
 			}
 			data = dataTemp;
 			size--;
