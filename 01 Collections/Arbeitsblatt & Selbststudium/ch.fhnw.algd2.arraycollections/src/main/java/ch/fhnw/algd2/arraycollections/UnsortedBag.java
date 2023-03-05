@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 	public static final int DEFAULT_CAPACITY = 100;
 	private E[] data;
+	private int size;
 
 	public UnsortedBag() {
 		this(DEFAULT_CAPACITY);
@@ -13,24 +14,66 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 	@SuppressWarnings("unchecked")
 	public UnsortedBag(int capacity) {
 		data = (E[])new Object[capacity];
+		size = 0;
 	}
 
 	@Override
 	public boolean add(E e) {
 		// TODO implement unless collection shall be immutable
-		throw new UnsupportedOperationException();
+
+		if (e == null) {
+			throw new NullPointerException();
+		}
+
+		if (size == data.length) {
+			throw new UnsupportedOperationException();
+		}
+
+		int i = 0;
+		while (i < data.length && data[i] != null)
+
+		data[i] = e;
+		size++;
+		return true;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean remove(Object o) {
 		// TODO implement unless collection shall be immutable
-		throw new UnsupportedOperationException();
+
+		if (o == null) {
+			throw new NullPointerException();
+		}
+
+		if (!(contains(o) || size == 0)) {
+			return false;
+		}
+
+		int i = 0;
+		while (i < data.length && !o.equals(data[i])) i++;
+
+		data[i] = null;
+		return true;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean contains(Object o) {
 		// TODO must be implemented
-		throw new UnsupportedOperationException();
+
+		if (o == null) {
+			throw new NullPointerException();
+		}
+
+		int i = 0;
+		while (i < data.length && !o.equals(data[i])) i++;
+
+		return i < data.length;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -41,7 +84,8 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 	@Override
 	public int size() {
 		// TODO must be implemented
-		return 0;
+
+		return size;
 	}
 
 	public static void main(String[] args) {
