@@ -11,7 +11,16 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 	@Override
 	public boolean add(E e) {
 		// TODO implement this operation (part A)
-		throw new UnsupportedOperationException();
+
+		Node<E> temp = new Node<>(e);
+
+		temp.next = first;
+		first = temp;
+
+		size++;
+		return true;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
