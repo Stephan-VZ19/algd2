@@ -41,7 +41,29 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 	@Override
 	public boolean remove(Object o) {
 		// TODO implement this operation (part C)
-		throw new UnsupportedOperationException();
+
+		if (!contains(o)) {
+			return false;
+		}
+
+		Node<E> current = first;
+		Node<E> previous = first;
+
+		while (current != null && !current.elem.equals(o)) {
+			previous = current;
+			current = current.next;
+		}
+
+		if (current != null) {
+			previous.next = current.next;
+			current.next = null;
+			size--;
+			return true;
+		}
+
+		return false;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
