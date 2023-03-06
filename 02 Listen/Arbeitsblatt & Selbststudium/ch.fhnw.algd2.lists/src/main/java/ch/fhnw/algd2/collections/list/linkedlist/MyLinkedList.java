@@ -7,16 +7,26 @@ import ch.fhnw.algd2.collections.list.MyAbstractList;
 public class MyLinkedList<E> extends MyAbstractList<E> {
 	private int size = 0;
 	private Node<E> first;
+	private Node<E> last;
 
 	@Override
 	public boolean add(E e) {
 		// TODO implement this operation (part A)
 
 		Node<E> temp = new Node<>(e);
+		Node<E> current = first;
 
-		temp.next = first;
-		first = temp;
-
+		// if the list is empty
+		if (current == null) {
+			first = temp;
+			last = temp;
+		} else {
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = temp;
+			last = temp;
+		}
 		size++;
 		return true;
 
@@ -47,7 +57,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 
 		Node<E> current = first;
-		Node<E> previous = first;
+		Node<E> previous = null;
 
 		while (current != null && !current.elem.equals(o)) {
 			previous = current;
