@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 	public static final int DEFAULT_CAPACITY = 100;
 	private E[] data;
-	private int size;
+	private int size = 0;
 
 	public UnsortedBag() {
 		this(DEFAULT_CAPACITY);
@@ -14,7 +14,6 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 	@SuppressWarnings("unchecked")
 	public UnsortedBag(int capacity) {
 		data = (E[])new Object[capacity];
-		size = 0;
 	}
 
 	@Override
@@ -26,11 +25,11 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 		}
 
 		if (size == data.length) {
-			throw new UnsupportedOperationException();
+			throw new IllegalStateException();
 		}
 
 		int i = 0;
-		while (i < data.length && data[i] != null)
+		while (i < data.length && data[i] != null) i++;
 
 		data[i] = e;
 		size++;
