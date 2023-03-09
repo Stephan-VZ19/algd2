@@ -40,11 +40,6 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 			data[size] = e;
 			size++;
 			return true;
-		} else if (i == size && size == data.length) {
-			if (contains(e)) {
-				return false;
-			}
-			throw new UnsupportedOperationException();
 		} else if (i < size) {
 			E[] dataTemp = (E[])new Comparable[data.length];
 			// everything before index i
