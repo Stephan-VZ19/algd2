@@ -50,10 +50,21 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 			return false;
 		}
 
+		// find first index where the element is
 		int i = 0;
 		while (i < data.length && !o.equals(data[i])) i++;
 
-		data[i] = null;
+		if (i == size-1) {
+			data[i] = null;
+			size--;
+		} else {
+			while (i < size-1) {
+				data[i] = data[i+1];
+				i++;
+			}
+			data[i] = null;
+			size--;
+		}
 		return true;
 
 		// throw new UnsupportedOperationException();
@@ -91,6 +102,11 @@ public class UnsortedBag<E> extends AbstractArrayCollection<E> {
 		UnsortedBag<Integer> bag = new UnsortedBag<Integer>();
 		bag.add(2);
 		bag.add(1);
+		bag.add(3);
+		bag.add(4);
+		bag.add(5);
+		bag.remove(3);
+		bag.remove(4);
 		System.out.println(Arrays.toString(bag.toArray()));
 	}
 }
