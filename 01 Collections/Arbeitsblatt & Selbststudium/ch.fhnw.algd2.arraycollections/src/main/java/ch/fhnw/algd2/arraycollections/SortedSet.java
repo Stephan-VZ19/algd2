@@ -30,7 +30,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractArrayCol
 		}
 
 		if (size == data.length) {
-			throw new UnsupportedOperationException();
+			throw new IllegalStateException();
 		}
 		// Index i, where the element should be added, sorted
 		int i = 0;
