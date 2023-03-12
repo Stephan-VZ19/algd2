@@ -57,7 +57,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 
 		Node<E> current = first;
-		Node<E> previous = new Node<E>(null, current);
+		Node<E> previous = null;
 
 		while (current != null && !current.elem.equals(o)) {
 			previous = current;
@@ -65,17 +65,25 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 
 		if (current != null) {
-			if (previous != null) {
+			if (previous != null) {  	// element is at the first place
 				previous.next = current.next;
 				if (current == last) {
 					last = previous;
 				}
-			} else {
-				first = current.next;
-
+			} else {     // element is at the last place
+				if (current.next != null) {
+					first = current.next;
+					if (current == last) {
+						last = previous;
+					}
+				} else {
+					first = null;
+					last = null;
+				}
 			}
 		}
 
+		size--;
 		return true;
 		// throw new UnsupportedOperationException();
 	}
