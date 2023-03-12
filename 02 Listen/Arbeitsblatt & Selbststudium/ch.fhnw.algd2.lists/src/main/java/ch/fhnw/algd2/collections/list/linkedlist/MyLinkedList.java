@@ -13,19 +13,19 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 	public boolean add(E e) {
 		// TODO implement this operation (part A)
 
-		Node<E> temp = new Node<>(e);
+		Node<E> addNode = new Node<>(e);
 		Node<E> current = first;
 
 		// if the list is empty
 		if (current == null) {
-			first = temp;
-			last = temp;
+			first = addNode;
+			last = addNode;
 		} else {
 			while (current.next != null) {
 				current = current.next;
 			}
-			current.next = temp;
-			last = temp;
+			current.next = addNode;
+			last = addNode;
 		}
 		size++;
 		return true;
@@ -57,7 +57,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 
 		Node<E> current = first;
-		Node<E> previous = null;
+		Node<E> previous = new Node<E>(null, current);
 
 		while (current != null && !current.elem.equals(o)) {
 			previous = current;
@@ -65,14 +65,18 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 
 		if (current != null) {
-			previous.next = current.next;
-			current.next = null;
-			size--;
-			return true;
+			if (previous != null) {
+				previous.next = current.next;
+				if (current == last) {
+					last = previous;
+				}
+			} else {
+				first = current.next;
+
+			}
 		}
 
-		return false;
-
+		return true;
 		// throw new UnsupportedOperationException();
 	}
 
@@ -130,6 +134,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		list.add(1);
 		list.add(2);
 		list.add(3);
+		list.remove(Integer.valueOf(1));
 		System.out.println(Arrays.toString(list.toArray()));
 	}
 }
