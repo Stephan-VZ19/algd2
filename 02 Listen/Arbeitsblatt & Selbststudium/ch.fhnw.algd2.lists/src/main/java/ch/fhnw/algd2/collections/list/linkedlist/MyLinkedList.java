@@ -91,13 +91,50 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 	@Override
 	public E get(int index) {
 		// TODO implement this operation (part D)
-		throw new UnsupportedOperationException();
+
+		int counter = 0;
+		Node<E> current = first;
+
+		if (index >= size || current == null) {
+			throw new IllegalStateException();
+		}
+
+		while (current.next != null && counter < index) {
+			current = current.next;
+			counter++;
+		}
+
+		return current.elem;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void add(int index, E element) {
 		// TODO implement this operation (part D)
-		throw new UnsupportedOperationException();
+
+		int counter = 0;
+		Node<E> addNode = new Node<>(element);
+		Node<E> current = first;
+		Node<E> previous = null;
+
+		if (index >= size+2 || current == null) {
+			throw new IllegalStateException();
+		}
+
+		if (size == 0 && index == 0) {
+			add(element);
+		}
+
+		while (current != null && counter < counter) {
+			previous = current;
+			current = current.next;
+			counter++;
+		}
+
+		// TODO
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
