@@ -95,8 +95,8 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		int counter = 0;
 		Node<E> current = first;
 
-		if (index >= size || current == null) {
-			throw new IllegalStateException();
+		if (index >= size || index < 0) {
+			throw new IndexOutOfBoundsException();
 		}
 
 		while (current.next != null && counter < index) {
@@ -118,29 +118,63 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		Node<E> current = first;
 		Node<E> previous = null;
 
-		if (index >= size+2 || current == null) {
-			throw new IllegalStateException();
+		if (index >= size+1 || index < 0) {
+			throw new IndexOutOfBoundsException();
 		}
 
-		if (size == 0 && index == 0) {
+		if ((size == 0 && index == 0) || index == size) {
 			add(element);
+		} else {
+			while (current != null && counter < index) {
+				previous = current;
+				current = current.next;
+				counter++;
+			}
+
+			// insert new node before the index element
+			addNode.next = current;
+			// set new pointers
+			if (!(previous == null)) {
+				previous.next = addNode;
+			} else { // list has only 1 element and index is 0 or 1
+				if (index == 0) {
+					addNode.next = first;
+					first = addNode;
+				} else {
+					current.next = addNode;
+					last = addNode;
+				}
+			}
 		}
 
-		while (current != null && counter < counter) {
-			previous = current;
-			current = current.next;
-			counter++;
-		}
-
-		// TODO
-
+		size++;
 		// throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public E remove(int index) {
 		// TODO implement this operation (part D)
-		throw new UnsupportedOperationException();
+
+		int counter = 0;
+		Node<E> current = first;
+		Node<E> previous = null;
+
+		if (index >= size+1 || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		while (current != null && counter < index) {
+			previous = current;
+			current = current.next;
+			counter++;
+		}
+
+		previous.next = current.next;
+		size--;
+
+		return current.elem;
+
+		// throw new UnsupportedOperationException();
 	}
 
 	@Override
