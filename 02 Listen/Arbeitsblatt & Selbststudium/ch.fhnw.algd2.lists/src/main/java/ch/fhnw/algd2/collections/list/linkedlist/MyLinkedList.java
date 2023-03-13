@@ -169,7 +169,17 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 			counter++;
 		}
 
-		previous.next = current.next;
+		if (!(previous == null) && (current != null)) {
+			previous.next = current.next;
+		} else { // list has only 1 element and index is 0 or 1
+			if (index == 0) {
+				first = null;
+				last = null;
+			} else {
+				throw new IndexOutOfBoundsException();
+			}
+		}
+
 		size--;
 
 		return current.elem;
