@@ -131,18 +131,21 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 				counter++;
 			}
 
-			// insert new node before the index element
-			addNode.next = current;
-			// set new pointers
-			if (!(previous == null)) {
-				previous.next = addNode;
-			} else { // list has only 1 element and index is 0 or 1
-				if (index == 0) {
-					addNode.next = first;
-					first = addNode;
-				} else {
-					current.next = addNode;
-					last = addNode;
+			if (current == null) {
+				add(element);
+			} else {
+				if (!(previous == null)) {
+					addNode.next = current;
+					previous.next = addNode;
+				} else { // list has only 1 element and dex is 0 or 1
+					if (index == 0) {
+						addNode.next = first;
+						first = addNode;
+					} else if (index == 1) {
+						add(element);
+					} else {
+						throw new IndexOutOfBoundsException();
+					}
 				}
 			}
 		}
@@ -169,15 +172,17 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 			counter++;
 		}
 
-		if (!(previous == null) && (current != null)) {
+		if (!(previous == null) && current != null) {
 			previous.next = current.next;
-		} else { // list has only 1 element and index is 0 or 1
+		} else if ((previous == null) && current != null) { // list has only 1 element and index is 0 or 1
 			if (index == 0) {
 				first = null;
 				last = null;
 			} else {
 				throw new IndexOutOfBoundsException();
 			}
+		} else if (current == null) { // list is empty
+			throw new IndexOutOfBoundsException();
 		}
 
 		size--;
@@ -224,6 +229,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		list.add(2);
 		list.add(3);
 		list.remove(Integer.valueOf(1));
+		list.add(1,Integer.valueOf(5));
 		System.out.println(Arrays.toString(list.toArray()));
 	}
 }
