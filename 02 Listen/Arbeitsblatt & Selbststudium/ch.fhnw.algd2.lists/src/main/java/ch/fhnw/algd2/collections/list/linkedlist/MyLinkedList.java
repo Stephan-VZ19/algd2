@@ -21,10 +21,10 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 			first = addNode;
 			last = addNode;
 		} else {
-			while (current.next != null) {
-				current = current.next;
-			}
-			current.next = addNode;
+//			while (current.next != null) {
+//				current = current.next;
+//			}
+			last.next = addNode;
 			last = addNode;
 		}
 		size++;
@@ -125,7 +125,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		if ((size == 0 && index == 0) || index == size) {
 			add(element);
 		} else {
-			while (current != null && counter < index) {
+			while (current != null && counter < index-1) {
 				previous = current;
 				current = current.next;
 				counter++;
@@ -223,6 +223,17 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		}
 	}
 
+	public boolean cut(int start, int end) {
+
+		if (start < 0 || start >= size || end > size || end < 0 || start <= end) {
+			return false;
+		}
+
+		
+
+		return false;
+	}
+
 	public static void main(String[] args) {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(1);
@@ -230,6 +241,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 		list.add(3);
 		list.remove(Integer.valueOf(1));
 		list.add(1,Integer.valueOf(5));
+		list.remove(1);
 		System.out.println(Arrays.toString(list.toArray()));
 	}
 }
