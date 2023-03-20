@@ -110,7 +110,21 @@ public class BinSearchTree {
 	// false sonst.
 	public boolean search(BinSearchTree node, int key) {
 		// TODO Aufgaben 4.3 und 4.5: search (entspricht contains aus Java Collection Framework)
-		return false;
+
+		if (node != null) {
+			if (key < node.key) {
+				return search(node.left, key);
+			} else {
+				if (key > node.key) {
+					return search(node.right, key);
+				} else {
+					return true;
+				}
+			}
+		} else {
+			return false;
+		}
+
 	}
 
 	/**
