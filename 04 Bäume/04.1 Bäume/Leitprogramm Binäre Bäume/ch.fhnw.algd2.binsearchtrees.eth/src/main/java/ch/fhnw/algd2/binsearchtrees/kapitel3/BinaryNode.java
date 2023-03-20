@@ -91,8 +91,18 @@ public class BinaryNode {
     // für eine Ausgabe OHNE anschliessenden Zeilenumbruch verwenden Sie bitte:
     // System.out.print()
     
-    public void preorderPrint() 
+    public void preorderPrint()
     {   // TODO Aufgabe 3.3: Konsolenausgabe mittels Preorder Traversierung
+
+        System.out.print(key + " ");
+
+        if (left != null) {
+            left.preorderPrint();
+        }
+
+        if (right != null) {
+            right.preorderPrint();
+        }
     }
 }
 
