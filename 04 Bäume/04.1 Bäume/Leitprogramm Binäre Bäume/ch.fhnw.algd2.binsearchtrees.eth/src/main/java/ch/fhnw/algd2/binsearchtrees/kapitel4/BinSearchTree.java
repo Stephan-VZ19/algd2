@@ -142,6 +142,16 @@ public class BinSearchTree {
 	// Geben Sie zur Kontrolle den Wert jedes besuchten Knoten aus!
 	public BinSearchTree insert(BinSearchTree node, int key) {
 		// TODO Aufgaben 4.8: insert (entspricht add aus Java Collection Framework)
+
+		if (node == null) {
+			node = new BinSearchTree(key);
+		} else {
+			if (key < node.key) {
+				node.setLeft(insert(node.left, key));
+			} else {
+				node.setRight(insert(node.right, key));
+			}
+		}
 		return node;
 	}
 
