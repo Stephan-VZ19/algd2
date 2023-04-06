@@ -1,5 +1,7 @@
 import ch.fhnw.algd2.treeeditor.base.Tree;
 
+import java.util.Objects;
+
 /**
  * Implements an unbalanced binary search tree. Note that all "matching" is
  * based on the compareTo method.
@@ -135,7 +137,16 @@ class BinarySearchTree<K extends Comparable<? super K>, E> implements Tree<K, E>
 	@Override
 	public String toString() {
 		// TODO implement method toString here
-		return "TO BE IMPLEMENTED";
+
+
+		String str = "";
+		if (root != null) {
+			str = Objects.toString(root.element);
+		}
+
+
+
+		return str;
 	}
 
 	private static class Node<K extends Comparable<? super K>, E> implements Tree.Node<K, E> {
