@@ -171,6 +171,18 @@ public class BinSearchTree {
 	// Leitprogramms auf
 	public BinSearchTree delete(BinSearchTree node, int key) {
 		// TODO Aufgaben 4.13: delete (entspricht remove aus Java Collection Framework)
+
+		if (!search(node, key)) {
+			return node;
+		}
+
+		if (node != null && node.key == key) {
+			if (node.left != null && node.right != null) {
+				// mit inorder successor ersetzen
+				
+			}
+		}
+
 		return node;
 	}
 }
