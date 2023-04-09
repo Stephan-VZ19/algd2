@@ -172,17 +172,28 @@ public class BinSearchTree {
 	public BinSearchTree delete(BinSearchTree node, int key) {
 		// TODO Aufgaben 4.13: delete (entspricht remove aus Java Collection Framework)
 
-		if (!search(node, key)) {
-			return node;
-		}
-
-		if (node != null && node.key == key) {
-			if (node.left != null && node.right != null) {
-				// mit inorder successor ersetzen
-				
+		if (node != null) {
+			if (key < node.getKey()) node.setLeft(delete(node.getLeft(), key));
+			else if (key > node.getKey()) node.setRight(delete(node.getRight(), key));
+			else if (node.getRight() == null) node = node.getLeft();
+			else {
+				if (node.getLeft() == null) node = node.getLeft();
+				else {
+					BinSearchTree n = node.getRight(), p = null;
+					while (n.getLeft() != null) {
+						p = n;
+						n = n.getLeft();
+					}
+					if (p != null) {
+						p.setLeft(n.getRight());
+						n.setLeft(node.getLeft());
+						n.setRight(node.getRight());
+					} else n.setLeft(node.getLeft());
+					node = n;
+				}
+				node = delete(node, key);
 			}
 		}
-
 		return node;
 	}
 }
