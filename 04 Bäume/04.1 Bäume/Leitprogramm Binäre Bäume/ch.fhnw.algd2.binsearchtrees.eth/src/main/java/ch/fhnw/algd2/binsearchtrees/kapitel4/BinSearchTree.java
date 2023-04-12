@@ -1,5 +1,7 @@
 package ch.fhnw.algd2.binsearchtrees.kapitel4;
 
+import java.lang.invoke.DelegatingMethodHandle$Holder;
+
 /**
  * ETH Zürich; Leitprogramm; Binäre Suchbäume -----
  * Das ist die Klasse eines
@@ -195,5 +197,12 @@ public class BinSearchTree {
 			}
 		}
 		return node;
+	}
+
+	public int[] cut(int from, int to) {
+
+
+
+		return null;
 	}
 }
