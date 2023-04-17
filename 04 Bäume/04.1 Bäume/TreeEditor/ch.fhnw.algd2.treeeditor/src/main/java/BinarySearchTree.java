@@ -132,21 +132,67 @@ class BinarySearchTree<K extends Comparable<? super K>, E> implements Tree<K, E>
 	@Override
 	public void remove(K key) {
 		// TODO implement method remove here
+
+		root = remove(root, key);
 	}
 
-	@Override
+	/**
+	 * Solution
+	 * @param node
+	 * @param key
+	 * @return
+	 */
+	private Node<K, E> remove(Node<K, E> node, K key) {
+		if (node != null) {
+			int c = key.compareTo(node.getKey());
+			if (c < 0) node.left = remove(node.getLeft(), key);
+			else if (c > 0) node.right = remove(node.getRight(), key);
+			else if (node.getRight() == null) {
+				node = node.getLeft();
+				--nodeCount;
+			}
+			else if (node.getLeft() == null) {
+				node = node.getRight();
+				--nodeCount;
+			}
+			else {
+				Node<K, E> n = node.getRight(), p = null;
+				while (n.getLeft() != null) {
+					p = n;
+					n = n.getLeft();
+				}
+				if (p != null) {
+					p.left = n.getRight();	// delete the replacement node
+					n.left = node.getLeft();	// save the left tree from the deleting node
+					n.right = node.getRight();	// save the right tree from the deleting node
+				} else {
+					n.left = node.getLeft();
+				}
+				node = n;	// replace the deleting node with the replacement node
+				--nodeCount;
+			}
+		}
+		return node;
+	}
+
+
+
 	public String toString() {
 		// TODO implement method toString here
 
+		// solution:
+		return toString(root);
+	}
 
-		String str = "";
-		if (root != null) {
-			str = Objects.toString(root.element);
-		}
-
-
-
-		return str;
+	/**
+	 * Solution
+	 * @param n
+	 * @return
+	 */
+	public String toString(Node<K, E> n) {
+		if (n != null) {
+			return "[" + toString(n.left) + n.key + toString(n.right) + "]";
+		} else return "";
 	}
 
 	private static class Node<K extends Comparable<? super K>, E> implements Tree.Node<K, E> {
