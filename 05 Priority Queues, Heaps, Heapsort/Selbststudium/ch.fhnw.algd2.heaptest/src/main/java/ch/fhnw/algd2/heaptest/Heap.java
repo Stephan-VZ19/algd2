@@ -63,6 +63,8 @@ class Heap<K> implements PriorityQueue<K> {
 	@Override
 	public void clear() {
 		// TODO 05 clear the heap from all elements
+
+		heap = null;
 	}
 
 	/**
