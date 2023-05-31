@@ -1,5 +1,7 @@
 package ch.fhnw.algd2.binsearchtrees.kapitel4;
 
+import java.lang.invoke.DelegatingMethodHandle$Holder;
+
 /**
  * ETH Zürich; Leitprogramm; Binäre Suchbäume -----
  * Das ist die Klasse eines
@@ -171,6 +173,36 @@ public class BinSearchTree {
 	// Leitprogramms auf
 	public BinSearchTree delete(BinSearchTree node, int key) {
 		// TODO Aufgaben 4.13: delete (entspricht remove aus Java Collection Framework)
+
+		if (node != null) {
+			if (key < node.getKey()) node.setLeft(delete(node.getLeft(), key));
+			else if (key > node.getKey()) node.setRight(delete(node.getRight(), key));
+			else if (node.getRight() == null) node = node.getLeft();
+			else {
+				if (node.getLeft() == null) node = node.getLeft();
+				else {
+					BinSearchTree n = node.getRight(), p = null;
+					while (n.getLeft() != null) {
+						p = n;
+						n = n.getLeft();
+					}
+					if (p != null) {
+						p.setLeft(n.getRight());
+						n.setLeft(node.getLeft());
+						n.setRight(node.getRight());
+					} else n.setLeft(node.getLeft());
+					node = n;
+				}
+				node = delete(node, key);
+			}
+		}
 		return node;
+	}
+
+	public int[] cut(int from, int to) {
+
+
+
+		return null;
 	}
 }
