@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+wrapper.gradleVersion = '8.0.1'
+
+sourceCompatibility = 17
+targetCompatibility = 17
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+task testArrayInit (type: Test) {
+	group = 'verification'
+	description = 'Runs tests of the array initialization'
+	
+	include('ch/fhnw/algd2/hashing/ArrayInitializationTest.class')
+}
+
+task testAddElement (type: Test) {
+	group = 'verification'
+	description = 'Runs tests of element insertion'
+	
+	include('ch/fhnw/algd2/hashing/AddElementTest.class')
+}
+
+task testContainsElement (type: Test) {
+	group = 'verification'
+	description = 'Runs tests of element query'
+	
+	include('ch/fhnw/algd2/hashing/ContainsElementTest.class')
+}
+
+task testRemoveELement (type: Test) {
+	group = 'verification'
+	description = 'Runs tests of element removal'
+	
+	include('ch/fhnw/algd2/hashing/RemoveElementTest.class')
+}
