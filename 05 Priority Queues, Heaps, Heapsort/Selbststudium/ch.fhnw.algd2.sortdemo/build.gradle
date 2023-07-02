@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+
+mainClassName = "Application"
+
+wrapper.gradleVersion = '8.0.1'
+
+sourceCompatibility = 17
+targetCompatibility = 17
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	implementation files {'lib/ch.fhnw.algd.sortdemo.algorithms.algd.jar'}
+	implementation files {'lib/ch.fhnw.algd.sortdemo.awt.numericalview.jar'}
+	implementation files {'lib/ch.fhnw.algd.sortdemo.awt.simpleview.jar'}
+	implementation files {'lib/ch.fhnw.algd.sortdemo.awt.window.jar'}
+	implementation files {'lib/ch.fhnw.algd.sortdemo.framework.jar'}
+	implementation files {'lib/ch.fhnw.algd.sortdemo.viewPicker.jar'}
+}
