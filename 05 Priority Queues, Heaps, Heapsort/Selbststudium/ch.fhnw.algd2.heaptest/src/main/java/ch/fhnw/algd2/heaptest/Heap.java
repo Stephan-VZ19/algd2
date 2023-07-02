@@ -64,7 +64,8 @@ class Heap<K> implements PriorityQueue<K> {
 	public void clear() {
 		// TODO 05 clear the heap from all elements
 
-		heap = null;
+		heap = new HeapNode[heap.length];
+		size = 0;
 	}
 
 	/**
@@ -82,6 +83,13 @@ class Heap<K> implements PriorityQueue<K> {
 	@Override
 	public void add(K element, long priority) throws QueueFullException {
 		// TODO 07 add the item element with the priority priority to the heap
+
+		if (isFull()) {
+			throw new QueueFullException();
+		}
+		heap[size] = new HeapNode<K>(element, priority);
+		siftUp(size);
+		size++;
 	}
 
 	/**
@@ -95,8 +103,17 @@ class Heap<K> implements PriorityQueue<K> {
 	@Override
 	public K removeMin() throws QueueEmptyException {
 		// TODO 09 return the element from the heap's root and remove the element
-		// from the heap
-		return null;
+
+		if (isEmpty()) {
+			throw new QueueEmptyException();
+		}
+		K res = heap[0].element;
+		size--;
+		heap[0] = heap[size];
+		heap[size] = null;
+		siftDown(0);
+
+		return res;
 	}
 
 	/**
@@ -107,6 +124,17 @@ class Heap<K> implements PriorityQueue<K> {
 	 */
 	private void siftUp(int start) {
 		// TODO 08 implement sift up for element at start
+
+		int parent = parentIndex(start);
+		while (start > 0 && heap[start].priority < heap[parent].priority) {
+			swapElements(start, parent);
+			start = parent;
+			parent = parentIndex(parent);
+		}
+	}
+
+	private int parentIndex(int current) {
+		return (current - 1) / 2;
 	}
 
 	/**
@@ -117,6 +145,27 @@ class Heap<K> implements PriorityQueue<K> {
 	 */
 	private void siftDown(int start) {
 		// TODO 10 implement sift down for element at start
+
+		int child = indexOfSmallerChild(start);
+		while (child < size && heap[start].priority > heap[child].priority) {
+			swapElements(start, child);
+			start = child;
+			child = indexOfSmallerChild(child);
+		}
+	}
+
+	private int indexOfSmallerChild(int current) {
+		int child = 2 * current + 1;
+		if (child + 1 < size  && heap[child].priority > heap[child + 1].priority) {
+			child++;
+		}
+		return child;
+	}
+
+	private void swapElements(int a , int b) {
+		HeapNode<K> n = heap[a];
+		heap[a] = heap[b];
+		heap[b] = n;
 	}
 
 	/**
@@ -131,7 +180,13 @@ class Heap<K> implements PriorityQueue<K> {
 	public long[] toLongArray() {
 		// TODO 06 return array with all the priorities currently in the heap. Use
 		// order of storage. Put root element at position 0.
-		return null;
+
+		long[] l = new long[size];
+		for (int i = 0; i < size; i++) {
+			l[i] = heap[i].priority;
+		}
+
+		return l;
 	}
 
 	private static class HeapNode<K> {
